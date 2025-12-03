@@ -1,6 +1,8 @@
-import com.guicedee.guicedservlets.websockets.services.*;
+import com.guicedee.client.services.websocket.GuicedWebSocketOnAddToGroup;
+import com.guicedee.client.services.websocket.GuicedWebSocketOnPublish;
+import com.guicedee.client.services.websocket.GuicedWebSocketOnRemoveFromGroup;
 import com.jwebmp.rabbit.implementations.RabbitMQWebModuleInclusion;
-import com.guicedee.guicedinjection.interfaces.IGuiceScanModuleInclusions;
+import com.guicedee.client.services.config.IGuiceScanModuleInclusions;
 import com.jwebmp.rabbit.implementations.RabbitPublishToGroup;
 import com.jwebmp.rabbit.*;
 

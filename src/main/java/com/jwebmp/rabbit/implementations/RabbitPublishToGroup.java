@@ -1,6 +1,8 @@
 package com.jwebmp.rabbit.implementations;
 
-import com.guicedee.guicedservlets.websockets.services.*;
+import com.guicedee.client.services.websocket.GuicedWebSocketOnAddToGroup;
+import com.guicedee.client.services.websocket.GuicedWebSocketOnPublish;
+import com.guicedee.client.services.websocket.GuicedWebSocketOnRemoveFromGroup;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.rabbitmq.RabbitMQClient;
 import com.google.inject.Inject;
@@ -17,8 +19,8 @@ import java.util.logging.Level;
 @Log
 @Singleton
 public class RabbitPublishToGroup implements GuicedWebSocketOnAddToGroup<RabbitPublishToGroup>,
-        GuicedWebSocketOnRemoveFromGroup<RabbitPublishToGroup>,
-        GuicedWebSocketOnPublish<RabbitPublishToGroup>
+																																														GuicedWebSocketOnRemoveFromGroup<RabbitPublishToGroup>,
+																																														GuicedWebSocketOnPublish<RabbitPublishToGroup>
 {
 
     @Inject
