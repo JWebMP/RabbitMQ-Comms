@@ -27,7 +27,7 @@
 
         <dependency>
             <groupId>com.guicedee</groupId>
-            <artifactId>guiced-rabbit</artifactId>
+            <artifactId>rabbitmq</artifactId>
         </dependency>
 
         <dependency>
@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>com.guicedee</groupId>
-            <artifactId>guice-injection</artifactId>
+            <artifactId>inject</artifactId>
             <scope>compile</scope>
         </dependency>
 
