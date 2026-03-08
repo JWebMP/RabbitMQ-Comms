@@ -16,7 +16,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.jwebmp.client</groupId>
+            <groupId>com.jwebmp</groupId>
             <artifactId>jwebmp-client</artifactId>
         </dependency>
 
@@ -42,7 +42,7 @@
 
         <dependency>
             <groupId>com.jwebmp.core</groupId>
-            <artifactId>jwebmp-testlib</artifactId>
+            <artifactId>testlib</artifactId>
             <scope>test</scope>
         </dependency>
 
