@@ -19,9 +19,8 @@ import java.util.logging.Level;
 @Log
 @Singleton
 public class RabbitPublishToGroup implements GuicedWebSocketOnAddToGroup<RabbitPublishToGroup>,
-																																														GuicedWebSocketOnRemoveFromGroup<RabbitPublishToGroup>,
-																																														GuicedWebSocketOnPublish<RabbitPublishToGroup>
-{
+        GuicedWebSocketOnRemoveFromGroup<RabbitPublishToGroup>,
+        GuicedWebSocketOnPublish<RabbitPublishToGroup> {
 
     @Inject
     private RabbitMQClient client;
@@ -29,53 +28,41 @@ public class RabbitPublishToGroup implements GuicedWebSocketOnAddToGroup<RabbitP
     private Set<String> declaredExchanges = new HashSet<>();
 
     @Inject
-    void setup()
-    {
+    void setup() {
         onAddToGroup("Everyone");
     }
 
     @Override
-    public CompletableFuture<Boolean> onAddToGroup(String groupName)
-    {
-        if (declaredExchanges.contains(groupName))
-        {
+    public CompletableFuture<Boolean> onAddToGroup(String groupName) {
+        if (declaredExchanges.contains(groupName)) {
             return CompletableFuture.completedFuture(true);
         }
 
         CompletableFuture<Boolean> resultFuture = new CompletableFuture<>();
-        if (client.isConnected())
-        {
+        if (client.isConnected()) {
             var result = client.exchangeDeclare(groupName, "fanout", !groupName.startsWith("__vertx"), groupName.startsWith("__vertx"));
             result.onComplete((handler) -> {
-                if (handler.succeeded())
-                {
+                if (handler.succeeded()) {
                     declaredExchanges.add(groupName);
                     log.info("Group [" + groupName + "] exchange created");
                     resultFuture.complete(true);
-                }
-                else
-                {
+                } else {
                     log.warning("Could not create group exchange [" + groupName + "] - " + handler.cause()
-                                                                                                  .getMessage());
+                            .getMessage());
                     resultFuture.complete(false);
                 }
             });
-        }
-        else
-        {
+        } else {
             client.addConnectionEstablishedCallback(connection -> {
                 var result = client.exchangeDeclare(groupName, "fanout", !groupName.startsWith("__vertx"), groupName.startsWith("__vertx"));
                 result.onComplete((handler) -> {
-                    if (handler.succeeded())
-                    {
+                    if (handler.succeeded()) {
                         declaredExchanges.add(groupName);
                         log.info("Group [" + groupName + "] exchange created after connection established");
                         resultFuture.complete(true);
-                    }
-                    else
-                    {
+                    } else {
                         log.warning("Could not create group exchange on established [" + groupName + "] - " + handler.cause()
-                                                                                                                     .getMessage());
+                                .getMessage());
                         resultFuture.complete(false);
                     }
                 });
@@ -86,24 +73,17 @@ public class RabbitPublishToGroup implements GuicedWebSocketOnAddToGroup<RabbitP
     }
 
     @Override
-    public boolean publish(String groupName, String message)
-    {
-        try
-        {
+    public boolean publish(String groupName, String message) {
+        try {
             onAddToGroup(groupName).whenComplete((success, error) -> {
-                                       if (success)
-                                       {
-                                           client.basicPublish(groupName, "", Buffer.buffer(message));
-                                       }
-                                       else
-                                       {
-                                           log.log(Level.SEVERE, "Could not publish message to queue group [" + groupName + "]");
-                                       }
-                                   })
-                                   .get(5, TimeUnit.SECONDS);
-        }
-        catch (Exception e)
-        {
+                        if (success) {
+                            client.basicPublish(groupName, "", Buffer.buffer(message));
+                        } else {
+                            log.log(Level.SEVERE, "Could not publish message to queue group [" + groupName + "]");
+                        }
+                    })
+                    .get(5, TimeUnit.SECONDS);
+        } catch (Exception e) {
             log.log(Level.SEVERE, "Could not publish message to queue group [" + groupName + "]", e);
             return false;
         }
@@ -112,11 +92,9 @@ public class RabbitPublishToGroup implements GuicedWebSocketOnAddToGroup<RabbitP
     }
 
     @Override
-    public CompletableFuture<Boolean> onRemoveFromGroup(String groupName)
-    {
+    public CompletableFuture<Boolean> onRemoveFromGroup(String groupName) {
         //var a = onAddToGroup(groupName);
-        if (groupName.startsWith("__vertx"))
-        {
+        if (groupName.startsWith("__vertx")) {
             declaredExchanges.remove(groupName);
             client.exchangeDelete(groupName);
         }

@@ -158,28 +158,26 @@ import java.util.List;
                  }""")
 
 @NgProvider
-public class RabbitMQProvider implements INgProvider<RabbitMQProvider>
-{
+public class RabbitMQProvider implements INgProvider<RabbitMQProvider> {
     @Override
-    public List<String> decorators()
-    {
+    public List<String> decorators() {
         List<String> out = INgProvider.super.decorators();
-        out.add("@Injectable({\n" +
-                "  providedIn: 'root'\n" +
-                "})");
+        out.add("""
+                @Injectable({
+                  providedIn: 'root'
+                })""");
         return out;
     }
 
     @Override
-    public List<String> onDestroy()
-    {
+    public List<String> onDestroy() {
         var s = INgProvider.super.onDestroy();
         s.add("this.contextIdSubscription?.unsubscribe()");
-        s.add("if(RabbitMQProvider.client && RabbitMQProvider.client.connected)\n" +
-                "               {\n" +
-                "                   RabbitMQProvider.client.deactivate();\n" +
-                "               }\n" +
-                "               console.log('RabbitMQProvider destroyed')");
+        s.add("""
+                if(RabbitMQProvider.client && RabbitMQProvider.client.connected)
+                   {
+                       RabbitMQProvider.client.deactivate();
+                   }""");
         return s;
     }
 }
