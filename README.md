@@ -24,7 +24,7 @@ Built on [RabbitMQ](https://www.rabbitmq.com/) · [Vert.x RabbitMQ Client](https
 <dependency>
   <groupId>com.jwebmp</groupId>
   <artifactId>jwebmp-rabbitmq</artifactId>
-  <version>2.0.0-RC9</version>
+  <version>2.0.0-RC10</version>
 </dependency>
 ```
 
@@ -32,7 +32,7 @@ Built on [RabbitMQ](https://www.rabbitmq.com/) · [Vert.x RabbitMQ Client](https
 <summary>Gradle (Kotlin DSL)</summary>
 
 ```kotlin
-implementation("com.jwebmp:jwebmp-rabbitmq:2.0.0-RC9")
+implementation("com.jwebmp:jwebmp-rabbitmq:2.0.0-RC10")
 ```
 </details>
 
