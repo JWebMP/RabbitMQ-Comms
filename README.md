@@ -24,7 +24,7 @@ Built on [RabbitMQ](https://www.rabbitmq.com/) · [Vert.x RabbitMQ Client](https
 <dependency>
   <groupId>com.jwebmp</groupId>
   <artifactId>jwebmp-rabbitmq</artifactId>
-  <version>2.0.0-SNAPSHOT</version>
+  <version>2.0.3-SNAPSHOT</version>
 </dependency>
 ```
 
