@@ -25,7 +25,6 @@ import java.util.List;
 @NgComponentReference(EventBusService.class)
 
 @NgComponentReference(ContextIdService.class)
-@NgConstructorParameter("private contextIdService : ContextIdService")
 
 @NgImportReference(value = "Injectable", reference = "@angular/core")
 @NgImportReference(value = "Location", reference = "@angular/common")
