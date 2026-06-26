@@ -27,6 +27,6 @@ module com.jwebmp.rabbit {
 
     provides com.jwebmp.core.base.angular.modules.services.angular.WebSocketGroupAdd with RabbitMQDirective;
 
-    opens com.jwebmp.rabbit to com.google.guice, com.fasterxml.jackson.databind;
-    opens com.jwebmp.rabbit.implementations to com.google.guice, com.fasterxml.jackson.databind;
+    opens com.jwebmp.rabbit to com.google.guice, tools.jackson.databind;
+    opens com.jwebmp.rabbit.implementations to com.google.guice, tools.jackson.databind;
 }
