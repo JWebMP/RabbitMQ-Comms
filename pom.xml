@@ -16,15 +16,7 @@
     <description>A portable connector for JWebMP and RabbitMQ</description>
 
     <dependencies>
-        <dependency>
-            <groupId>com.jwebmp</groupId>
-            <artifactId>jwebmp-client</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>com.jwebmp</groupId>
-            <artifactId>jwebmp-vertx</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.guicedee</groupId>
@@ -34,11 +26,6 @@
         <dependency>
             <groupId>com.jwebmp.plugins</groupId>
             <artifactId>angular</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.guicedee</groupId>
-            <artifactId>inject</artifactId>
-            <scope>compile</scope>
         </dependency>
 
         <dependency>

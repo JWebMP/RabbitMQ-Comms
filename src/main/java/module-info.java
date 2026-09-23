@@ -10,12 +10,9 @@ module com.jwebmp.rabbit {
 
     exports com.jwebmp.rabbit;
 
-    requires transitive com.jwebmp.vertx;
     requires transitive com.jwebmp.core.angular;
-    requires com.jwebmp.core;
     
     requires com.guicedee.rabbit;
-    requires com.guicedee.guicedinjection;
 
     requires transitive io.vertx.rabbitmq;
     requires static lombok;
